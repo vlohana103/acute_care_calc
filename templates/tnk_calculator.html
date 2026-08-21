@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TNK Dose Calculator</title>
+</head>
+<body>
+    <h1>TNK Dose Calculator</h1>
+
+
+    <form method="POST">
+        <label for="weight">Patient Weight:</label>
+        <input type="text" id="weight" name="patient_weight">
+
+        <!-- The unit toggle radio buttons -->
+        <fieldset>
+            <legend>Select Unit:</legend>
+            <label>
+                <input type="radio" name="weight_unit" value="kg" checked> kg
+            </label>
+            <label>
+                <input type="radio" name="weight_unit" value="lbs"> lbs
+            </label>
+        </fieldset>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+
+    {% if weight %}
+        <p><strong>Patient Weight:</strong> {{ weight }} {{ unit }}</p>
+    {% endif %}
+
+    {% if result %}
+        <p>{{ result | safe }}</p>
+    {% endif %}
+</body>
+</html>
