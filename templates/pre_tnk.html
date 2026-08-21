@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pre-TNK Checklist</title>
+</head>
+<body>
+    <h1>Pre-TNK Checklist</h1>
+
+    <form method="POST">
+        <p>1. CT negative for bleed?</p>
+        <label><input type="radio" name="neg_bleed" value="yes" required> Yes</label>
+        <label><input type="radio" name="neg_bleed" value="no"> No</label>
+
+        <p>2. Verify dose with MAR?</p>
+        <label><input type="radio" name="verify_dose" value="yes" required> Yes</label>
+        <label><input type="radio" name="verify_dose" value="no"> No</label>
+
+        <p>3. Last Known Well Time confirmed <= 4.5 hours?</p>
+        <label><input type="radio" name="time_confirmed" value="yes" required> Yes</label>
+        <label><input type="radio" name="time_confirmed" value="no"> No</label>
+
+        <p>4. Verbal consent obtained by MD?</p>
+        <label><input type="radio" name="verbal_consent" value="yes" required> Yes</label>
+        <label><input type="radio" name="verbal_consent" value="no"> No</label>
+
+        <p>5. Blood Glusocse results obtained?</p>
+        <label><input type="radio" name="glucose_results" value="yes" required> Yes</label>
+        <label><input type="radio" name="glucose_results" value="no"> No</label>
+
+        <p>6. Labs Drawn?</p>
+        <label><input type="radio" name="labs_drawn" value="yes" required> Yes</label>
+        <label><input type="radio" name="labs_drawn" value="no"> No</label>
+
+        <p>7. NIHSS completed?</p>
+        <label><input type="radio" name="NIHSS_complete" value="yes" required> Yes</label>
+        <label><input type="radio" name="NIHSS_complete" value="no"> No</label>
+
+        <p>8. Exclusion criteria reviewed and cleared?</p>
+        <label><input type="radio" name="reviewed_cleared" value="yes" required> Yes</label>
+        <label><input type="radio" name="reviewed_cleared" value="no"> No</label>
+
+        <br><br>
+        <button type="submit">Verify Checklist</button>
+    </form>
+
+    {% if message %}
+        <p>{{ message }}</p>
+        {% if passed %}
+            <br>
+            <a href="/tnk-dose-calculator">Proceed to TNK Calculator</a>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
