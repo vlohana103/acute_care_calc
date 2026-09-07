@@ -1,36 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Post-TNK Care Reference</title>
-</head>
-<body>
-    <h1>Post-TNK Administration Care & Monitoring</h1>
+{% extends "base.html" %}
 
-    <h2>Vital Signs & Neuro Check Schedule</h2>
-    <ul>
-        <li><strong>Q15min</strong> for the first 2 hours</li>
-        <li><strong>Q30min</strong> for the next 6 hours</li>
-        <li><strong>Q1hr</strong> for the remaining 16 hours</li>
+{% block title %}Post-TNK Care Reference{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Post-TNK Administration Care & Monitoring</h2>
+
+    <h3>Blood Pressure & Oxygenation Targets</h3>
+    <p>Maintain <strong>BP &lt;180/105 mmHg</strong> and <strong>PO₂ ≥95%</strong> at all times following administration.</p>
+
+    <h3>Vital Signs & Neuro Assessment Schedule</h3>
+    <div class="monitoring-schedule">
+        <div class="schedule-item">
+            <div class="time">Q15 min</div>
+            <div class="duration">for 2 hours</div>
+        </div>
+        <div class="schedule-item">
+            <div class="time">Q30 min</div>
+            <div class="duration">for 6 hours</div>
+        </div>
+        <div class="schedule-item">
+            <div class="time">Q1 hr</div>
+            <div class="duration">for 16 hours</div>
+        </div>
+    </div>
+    <p style="color:#555; font-size:0.9rem;">Document VS and neurological assessments at each interval.</p>
+
+    <h3>⚠ Monitor for Hemorrhage Signs</h3>
+    <ul class="warning-list">
+        <li>Severe headache (sudden onset)</li>
+        <li>Acute hypertension (SBP &gt;180 or DBP &gt;105)</li>
+        <li>Nausea or vomiting</li>
+        <li>Decreased level of consciousness</li>
     </ul>
+    <p style="margin-top:10px; font-size:0.9rem; color:#c62828;">If any hemorrhage signs present → obtain emergency head CT immediately.</p>
 
-    <h2>Critical Warning Signs</h2>
-    
-    <h3>Hemorrhage / Bleeding Risks</h3>
-    <ul>
-        <li>Acute decline in neurological status or sudden drop in GCS</li>
-        <li>Sudden, severe headache</li>
-        <li>Active bleeding from gums, venipuncture sites, or hematuria</li>
-        <li>Acute hypertension (SBP > 180 or DBP > 105)</li>
+    <h3>⚠ Monitor for Allergic Reaction</h3>
+    <ul class="warning-list">
+        <li>Orolingual angioedema (tongue or oropharyngeal swelling)</li>
+        <li>Urticaria or rash</li>
+        <li>Respiratory distress</li>
     </ul>
+    <p style="margin-top:10px; font-size:0.9rem; color:#c62828;">If allergic reaction signs present → alert MD immediately.</p>
 
-    <h3>Allergic / Anaphylactic Reactions</h3>
-    <ul>
-        <li>Oropharyngeal or tongue swelling</li>
-        <li>Respiratory distress, wheezing, or stridor</li>
-        <li>Sudden hypotension or hives</li>
-    </ul>
-
-    <br>
-    <a href="/">Return to Home</a>
-</body>
-</html>
+    <a href="/" class="back-link">← Back to Home</a>
+</div>
+{% endblock %}

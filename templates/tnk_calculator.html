@@ -1,37 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>TNK Dose Calculator</title>
-</head>
-<body>
-    <h1>TNK Dose Calculator</h1>
+{% extends "base.html" %}
 
+{% block title %}TNK Dose Calculator{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>TNK Dose Calculator</h2>
+    <p style="color:#555; margin-bottom:20px;">
+        Tenecteplase dosing for acute ischemic stroke: <strong>0.25 mg/kg</strong>, maximum <strong>25 mg</strong>.
+        Use actual body weight. Draw up dose in a 5 mL syringe.
+    </p>
 
     <form method="POST">
-        <label for="weight">Patient Weight:</label>
-        <input type="text" id="weight" name="patient_weight">
+        <label for="patient_weight">Patient Weight</label>
+        <input type="number" id="patient_weight" name="patient_weight" step="0.1" min="1" placeholder="Enter weight" required>
 
-        <!-- The unit toggle radio buttons -->
-        <fieldset>
-            <legend>Select Unit:</legend>
-            <label>
-                <input type="radio" name="weight_unit" value="kg" checked> kg
-            </label>
-            <label>
-                <input type="radio" name="weight_unit" value="lbs"> lbs
-            </label>
-        </fieldset>
+        <label>Unit</label>
+        <div class="radio-group">
+            <label><input type="radio" name="weight_unit" value="kg" checked> Kilograms (kg)</label>
+            <label><input type="radio" name="weight_unit" value="lbs"> Pounds (lbs)</label>
+        </div>
 
-        <button type="submit">Calculate</button>
+        <button type="submit">Calculate Dose</button>
     </form>
 
-
-    {% if weight %}
-        <p><strong>Patient Weight:</strong> {{ weight }} {{ unit }}</p>
-    {% endif %}
-
     {% if result %}
-        <p>{{ result | safe }}</p>
+        <div class="result-box result-info">
+            {% if weight %}
+                <strong>Patient Weight:</strong> {{ weight }} {{ unit }}<br><br>
+            {% endif %}
+            {{ result | safe }}
+        </div>
     {% endif %}
-</body>
-</html>
+
+    <a href="/" class="back-link">← Back to Home</a>
+</div>
+{% endblock %}

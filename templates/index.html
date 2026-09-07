@@ -1,19 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Acute Care Calculator</title>
-    </head>
-    <body>
-        <h1>Acute Care Calculator</h1>
-        <p>Welcome to the homepage!</p>
-        <nav>
-            <ul>
-                <li><a href="/tnk-dose-calculator">TNK Dose Calculator</a></li>
-                <li><a href="/pre-tnk-checklist">Pre-TNK Checklist</a></li>
-                <li><a href="/post-tnk-care">Post-TNK Care Reference</a></li>
-                <li><a href="/stroke-imaging">Stroke Imaging Selection Tool</a></li>
-                <li><a href="/extended-window">Extended Window IVT Eligibility Tool</a></li>
-            </ul>
-        </nav>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Acute Care Calculator — Home{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>UC Stroke Protocol Reference Tools</h2>
+    <p style="color:#555; margin-bottom:20px;">Select a tool below to begin. Based on UC Stroke Team protocols for acute ischemic stroke management.</p>
+    <div class="nav-grid">
+        <a href="/pre-tnk-checklist" class="nav-card">
+            <h3>Pre-TNK Checklist</h3>
+            <p>Verify all safety criteria before TNK administration</p>
+        </a>
+        <a href="/tnk-dose-calculator" class="nav-card">
+            <h3>TNK Dose Calculator</h3>
+            <p>Weight-based tenecteplase dosing (0.25 mg/kg, max 25mg)</p>
+        </a>
+        <a href="/post-tnk-care" class="nav-card">
+            <h3>Post-TNK Care Reference</h3>
+            <p>Monitoring schedule and warning signs after administration</p>
+        </a>
+        <a href="/stroke-imaging" class="nav-card">
+            <h3>Stroke Imaging Selection</h3>
+            <p>MRI vs CTP selection based on onset timing</p>
+        </a>
+        <a href="/extended-window" class="nav-card">
+            <h3>Extended Window IVT</h3>
+            <p>Eligibility checker for 4.5–24hr treatment window</p>
+        </a>
+    </div>
+</div>
+{% endblock %}
