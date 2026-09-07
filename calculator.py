@@ -62,7 +62,7 @@ def calc(weight_num:float, weight_unit:str):
     elif weight_num >= 40:
         return f"{reminder}<br><br>Dose: 10 mg<br>Volume: 2 ml"
 
-    elif weight_num <= 40:    
+    elif weight_num < 40:    
         return f"{reminder}<br><br>Consult Pharmcist!"
     else:
         return "invalid input"
