@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Acute Care Calculator{% endblock %}</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #1a3a5c;
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        header a {
+            color: #a8d4f5;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        header a:hover { text-decoration: underline; }
+
+        .container {
+            max-width: 760px;
+            margin: 32px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            color: #1a3a5c;
+            margin-bottom: 16px;
+            font-size: 1.3rem;
+        }
+
+        h3 {
+            color: #1a3a5c;
+            margin: 16px 0 8px;
+            font-size: 1.05rem;
+        }
+
+        label { display: block; margin-bottom: 6px; font-weight: 500; }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .question:last-of-type { border-bottom: none; }
+
+        .question p {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        button[type="submit"] {
+            background-color: #1a3a5c;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover { background-color: #24527a; }
+
+        .result-box {
+            margin-top: 24px;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .result-pass {
+            background-color: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            color: #1b5e20;
+        }
+
+        .result-fail {
+            background-color: #ffebee;
+            border-left: 5px solid #c62828;
+            color: #b71c1c;
+        }
+
+        .result-info {
+            background-color: #e3f2fd;
+            border-left: 5px solid #1565c0;
+            color: #0d47a1;
+        }
+
+        .disclaimer {
+            background-color: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            color: #5d4037;
+            margin-bottom: 20px;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .nav-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            color: #1a3a5c;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #1a3a5c;
+            transition: box-shadow 0.2s;
+        }
+
+        .nav-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+        }
+
+        .nav-card h3 {
+            margin: 0 0 6px;
+            font-size: 1rem;
+        }
+
+        .nav-card p {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #1a3a5c;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+
+        .monitoring-schedule {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 12px 0 20px;
+        }
+
+        .schedule-item {
+            background: #e3f2fd;
+            border-radius: 6px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .schedule-item .time {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1a3a5c;
+        }
+
+        .schedule-item .duration {
+            font-size: 0.85rem;
+            color: #555;
+            margin-top: 4px;
+        }
+
+        .warning-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .warning-list li {
+            padding: 8px 0 8px 24px;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+
+        .warning-list li:before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+            color: #c62828;
+        }
+
+        .warning-list li:last-child { border-bottom: none; }
+
+        .proceed-link {
+            display: inline-block;
+            margin-top: 16px;
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .proceed-link:hover { background-color: #1b5e20; }
+
+        @media (max-width: 540px) {
+            .nav-grid { grid-template-columns: 1fr; }
+            .monitoring-schedule { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>⚕ Acute Care Calculator</h1>
+        <a href="/">Home</a>
+    </header>
+    <div class="container">
+        <div class="disclaimer">
+            ⚠ <strong>Educational &amp; Study Use Only.</strong> This tool is intended for board exam preparation and clinical reference study. It is not a substitute for clinical judgment, institutional protocols, or physician oversight.
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
