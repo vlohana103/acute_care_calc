@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Extended Window IVT Eligibility{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Extended Window IVT Eligibility Tool</h2>
+    <p style="color:#555; margin-bottom:20px;">
+        Determines eligibility for IV thrombolysis in the extended time window (4.5–24hrs) per UC Stroke Extended Window IVT Protocol.
+        For patients who are <strong>NOT</strong> planned for thrombectomy and do <strong>NOT</strong> have subacute-appearing hypodensity on CTH.
+    </p>
+
+    <form method="POST">
+        <div class="question">
+            <p>1. Is the patient planned for thrombectomy treatment?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="thrombectomy" value="yes" required> Yes</label>
+                <label><input type="radio" name="thrombectomy" value="no"> No</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. Does the patient have subacute-appearing hypodensity on CTH?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="hypodensity" value="yes" required> Yes</label>
+                <label><input type="radio" name="hypodensity" value="no"> No</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>3. Which imaging modality was used?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="imaging_type" value="mri" required> MRI</label>
+                <label><input type="radio" name="imaging_type" value="ctp"> CTP</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>4. If MRI — is there evidence of acute diffusion restriction <strong>WITHOUT</strong> corresponding FLAIR signal on WAKE-UP protocol MRI?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="mri_criteria" value="yes"> Yes</label>
+                <label><input type="radio" name="mri_criteria" value="no"> No</label>
+                <label><input type="radio" name="mri_criteria" value="na"> N/A (CTP used)</label>
+            </div>
+        </div>
+
+        <h3>CTP Criteria (all three must be met)</h3>
+
+        <div class="question">
+            <p>5. Predicted core volume (cc) — must be &lt;70cc</p>
+            <input type="number" name="core" step="0.1" min="0" placeholder="Enter core volume in cc (e.g. 45)">
+        </div>
+
+        <div class="question">
+            <p>6. Mismatch volume — must be ≥20</p>
+            <input type="number" name="mismatch_vol" step="0.1" min="0" placeholder="Enter mismatch volume (e.g. 85)">
+        </div>
+
+        <div class="question">
+            <p>7. Mismatch ratio — must be ≥1.2</p>
+            <input type="number" name="mismatch_ratio" step="0.01" min="0" placeholder="Enter mismatch ratio (e.g. 1.8)">
+        </div>
+
+        <button type="submit">Check Eligibility</button>
+    </form>
+
+    {% if result %}
+        {% if result[0] %}
+            <div class="result-box result-pass">
+                <strong>✓ {{ result[1] }}</strong>
+            </div>
+        {% else %}
+            <div class="result-box result-fail">
+                <strong>✗ {{ result[1] }}</strong>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <a href="/" class="back-link">← Back to Home</a>
+</div>
+{% endblock %}
